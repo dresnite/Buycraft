@@ -1,0 +1,6 @@
+name: Buycraft
+description: Buycraft but written properly
+author: GiantQuartz
+main: GiantQuartz\Buycraft
+version: 1.0.0
+api: [3.0.0, 4.0.0]

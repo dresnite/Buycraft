@@ -1,0 +1,40 @@
+<?php
+
+
+namespace GiantQuartz\provider;
+
+
+use GiantQuartz\Buycraft;
+
+abstract class Provider {
+
+    /** @var Buycraft */
+    private $plugin;
+
+    /** @var string */
+    private $secretKey;
+
+    public function __construct(Buycraft $plugin) {
+        $this->plugin = $plugin;
+        $this->secretKey = $plugin->getConfig()->get("secret-key");
+        $this->checkSecretKeyValidity();
+    }
+
+    /**
+     * @return string
+     */
+    public function getSecretKey(): string {
+        return $this->secretKey;
+    }
+
+    public abstract function fetchCommands(): void;
+
+    public abstract function removeCommands(array $commands): void;
+
+    public abstract function checkSecretKeyValidity(): void;
+
+    protected function scheduleAsyncTask(ProviderAsyncTask $task): void {
+        $this->plugin->getServer()->getAsyncPool()->submitTask($task);
+    }
+
+}

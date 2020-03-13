@@ -1,0 +1,3 @@
+# Introduce your Buycraft secret key
+# This is strictly necessary to link this plugin with your Buycraft panel
+secret-key: false
