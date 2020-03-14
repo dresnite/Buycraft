@@ -10,11 +10,11 @@ use GiantQuartz\provider\ProviderAsyncTask;
 
 class RemoveCommandsAsyncTask extends ProviderAsyncTask {
 
-    /** @var array */
+    /** @var string */
     private $identifiers;
 
     public function __construct(Provider $provider, array $identifiers) {
-        $this->identifiers = $identifiers;
+        $this->identifiers = implode("&ids[]=", $identifiers);
         parent::__construct($provider);
     }
 
@@ -27,7 +27,7 @@ class RemoveCommandsAsyncTask extends ProviderAsyncTask {
             CURLOPT_FAILONERROR => true,
             CURLOPT_POST => 1,
             CURLOPT_CUSTOMREQUEST => "DELETE",
-            CURLOPT_POSTFIELDS => "ids[]=" . implode("&ids[]=", $this->identifiers)
+            CURLOPT_POSTFIELDS => "ids[]=$this->identifiers"
         ]);
         $this->executeCurl($curl);
     }
