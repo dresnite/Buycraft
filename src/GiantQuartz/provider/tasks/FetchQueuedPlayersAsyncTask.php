@@ -23,12 +23,10 @@ class FetchQueuedPlayersAsyncTask extends ProviderAsyncTask {
         $plugin = $this->getBuycraft();
         $result = $this->getResult();
 
-        $queuedPlayers = [];
         foreach($result["players"] as $playerData) {
-            $queuedPlayers[] = strtolower($playerData["name"]);
+            $plugin->getProvider()->fetchActions($playerData["id"]);
         }
 
-        $plugin->getProvider()->fetchActions($queuedPlayers);
         $plugin->getLogger()->debug("FetchQueuedPlayersAsyncTask was successfully executed");
     }
 
