@@ -5,18 +5,33 @@ namespace GiantQuartz\provider;
 
 
 use Exception;
+use GiantQuartz\Buycraft;
+use pocketmine\plugin\Plugin;
 use pocketmine\scheduler\AsyncTask;
+use pocketmine\Server;
 
 abstract class ProviderAsyncTask extends AsyncTask {
 
     /** @var string */
-    protected $secretKey;
+    protected const QUEUE_URL = "https://plugin.tebex.io/queue/";
 
     /** @var string */
-    protected const QUEUE_URL = "https://plugin.tebex.io/queue/";
+    protected $secretKey;
 
     public function __construct(Provider $provider) {
         $this->secretKey = $provider->getSecretKey();
+    }
+
+    /**
+     * @return Plugin|Buycraft
+     * @throws Exception
+     */
+    protected function getBuycraft(): Plugin {
+        $plugin = Server::getInstance()->getPluginManager()->getPlugin("Buycraft");
+        if($plugin === null) {
+            throw new Exception("Tried to execute an async task while the Buycraft plugin is disabled");
+        }
+        return $plugin;
     }
 
     protected function getCurlSession(string $url = self::QUEUE_URL) {
@@ -41,7 +56,9 @@ abstract class ProviderAsyncTask extends AsyncTask {
      * @throws Exception
      */
     protected function executeCurl($curl): void {
-        $this->checkCurlResult(curl_exec($curl), curl_error($curl));
+        $result = curl_exec($curl);
+        $this->checkCurlResult($result, curl_error($curl));
+        $this->setResult(json_decode($result, true));
     }
 
     /**
