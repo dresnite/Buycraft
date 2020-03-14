@@ -58,6 +58,7 @@ abstract class ProviderAsyncTask extends AsyncTask {
     protected function executeCurl($curl): void {
         $result = curl_exec($curl);
         $this->checkCurlResult($result, curl_error($curl));
+        curl_close($curl);
         $this->setResult(json_decode($result, true));
     }
 
