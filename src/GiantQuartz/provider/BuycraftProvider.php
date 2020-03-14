@@ -7,7 +7,7 @@ namespace GiantQuartz\provider;
 use Exception;
 use GiantQuartz\provider\tasks\FetchOfflineCommandsAsyncTask;
 use GiantQuartz\provider\tasks\FetchQueuedPlayersAsyncTask;
-use GiantQuartz\provider\tasks\FetchQueuedPlayerActions;
+use GiantQuartz\provider\tasks\FetchQueuedPlayerActionsAsyncTask;
 use GiantQuartz\provider\tasks\RemoveCommandsAsyncTask;
 
 class BuycraftProvider extends Provider {
@@ -21,7 +21,7 @@ class BuycraftProvider extends Provider {
     }
 
     public function fetchQueuedPlayerActions(int $playerId, string $playerName): void {
-        $this->scheduleAsyncTask(new FetchQueuedPlayerActions($this, $playerId, $playerName));
+        $this->scheduleAsyncTask(new FetchQueuedPlayerActionsAsyncTask($this, $playerId, $playerName));
     }
 
     public function removeCommands(array $identifiers): void {

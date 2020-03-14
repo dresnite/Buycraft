@@ -9,7 +9,7 @@ use GiantQuartz\provider\Provider;
 use GiantQuartz\provider\ProviderAsyncTask;
 use GiantQuartz\utils\BuycraftCommand;
 
-class FetchQueuedPlayerActions extends ProviderAsyncTask {
+class FetchQueuedPlayerActionsAsyncTask extends ProviderAsyncTask {
 
     /** @var array */
     private $playerId;
@@ -43,6 +43,8 @@ class FetchQueuedPlayerActions extends ProviderAsyncTask {
         }
 
         $plugin->getQueue()->addAction($this->playerName, $commands);
+
+        $plugin->getLogger()->debug("FetchQueuedPlayerActionsAsyncTask was successfully executed");
     }
 
 }
