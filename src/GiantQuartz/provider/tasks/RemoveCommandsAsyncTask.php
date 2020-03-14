@@ -7,7 +7,6 @@ namespace GiantQuartz\provider\tasks;
 use Exception;
 use GiantQuartz\provider\Provider;
 use GiantQuartz\provider\ProviderAsyncTask;
-use pocketmine\Server;
 
 class RemoveCommandsAsyncTask extends ProviderAsyncTask {
 
@@ -33,8 +32,11 @@ class RemoveCommandsAsyncTask extends ProviderAsyncTask {
         $this->executeCurl($curl);
     }
 
+    /**+
+     * @throws Exception
+     */
     public function onCompletion(): void {
-        Server::getInstance()->getLogger()->debug("RemoveCommandsAsyncTask was successfully executed");
+        $this->getBuycraft()->getLogger()->debug("RemoveCommandsAsyncTask was successfully executed");
     }
 
 }
