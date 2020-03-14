@@ -9,7 +9,7 @@ use GiantQuartz\provider\Provider;
 use GiantQuartz\provider\ProviderAsyncTask;
 use GiantQuartz\utils\BuycraftCommand;
 
-class FetchOnlineActionAsyncTask extends ProviderAsyncTask {
+class FetchQueuedPlayerActions extends ProviderAsyncTask {
 
     /** @var array */
     private $playerId;

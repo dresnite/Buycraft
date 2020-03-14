@@ -29,7 +29,7 @@ abstract class Provider {
 
     public abstract function fetchQueuedPlayers(): void;
 
-    public abstract function fetchActions(array $players): void;
+    public abstract function fetchQueuedPlayerActions(int $playerPlayerId): void;
 
     public abstract function removeCommands(array $identifiers): void;
 
