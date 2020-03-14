@@ -30,6 +30,7 @@ class FetchOfflineCommandsAsyncTask extends ProviderAsyncTask {
         }
 
         $plugin->getProvider()->removeCommands($commandIdsExecuted);
+        $plugin->getLogger()->debug("FetchOfflineCommandsAsyncTask was successfully executed");
     }
 
 }
