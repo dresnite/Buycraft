@@ -27,6 +27,8 @@ abstract class Provider {
         return $this->secretKey;
     }
 
+    public abstract function fetchOfflineCommands(): void;
+
     public abstract function fetchQueuedPlayers(): void;
 
     public abstract function fetchQueuedPlayerActions(int $playerPlayerId): void;

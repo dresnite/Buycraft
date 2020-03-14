@@ -5,11 +5,16 @@ namespace GiantQuartz\provider;
 
 
 use Exception;
+use GiantQuartz\provider\tasks\FetchOfflineCommandsAsyncTask;
 use GiantQuartz\provider\tasks\FetchQueuedPlayersAsyncTask;
 use GiantQuartz\provider\tasks\FetchQueuedPlayerActions;
 use GiantQuartz\provider\tasks\RemoveCommandsAsyncTask;
 
 class BuycraftProvider extends Provider {
+
+    public function fetchOfflineCommands(): void {
+        $this->scheduleAsyncTask(new FetchOfflineCommandsAsyncTask($this));
+    }
 
     public function fetchQueuedPlayers(): void {
         $this->scheduleAsyncTask(new FetchQueuedPlayersAsyncTask($this));
