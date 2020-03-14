@@ -14,8 +14,12 @@ class FetchQueuedPlayerActions extends ProviderAsyncTask {
     /** @var array */
     private $playerId;
 
-    public function __construct(Provider $provider, int $playerId) {
+    /** @var string */
+    private $playerName;
+
+    public function __construct(Provider $provider, int $playerId, string $playerName) {
         $this->playerId = $playerId;
+        $this->playerName = $playerName;
         parent::__construct($provider);
     }
 
@@ -32,14 +36,13 @@ class FetchQueuedPlayerActions extends ProviderAsyncTask {
     public function onCompletion(): void {
         $plugin = $this->getBuycraft();
         $result = $this->getResult();
-        $username = $result["player"]["name"];
 
         $commands = [];
         foreach($result["commands"] as $commandData) {
-            $commands[] = new BuycraftCommand($commandData["id"], str_replace("{name}", $username, $commandData["command"]));
+            $commands[] = new BuycraftCommand($commandData["id"], str_replace("{name}", $this->playerName, $commandData["command"]));
         }
 
-        $plugin->getQueue()->addAction($username, $commands);
+        $plugin->getQueue()->addAction($this->playerName, $commands);
     }
 
 }
