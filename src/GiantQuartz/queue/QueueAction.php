@@ -5,7 +5,7 @@ namespace GiantQuartz\queue;
 
 
 use GiantQuartz\Buycraft;
-use pocketmine\command\ConsoleCommandSender;
+use GiantQuartz\utils\BuycraftCommand;
 
 class QueueAction {
 
@@ -15,7 +15,7 @@ class QueueAction {
     /** @var string */
     private $targetName;
 
-    /** @var string[] */
+    /** @var BuycraftCommand[] */
     private $commands;
 
     public function __construct(Buycraft $plugin, string $targetName, array $commands) {
@@ -33,12 +33,13 @@ class QueueAction {
     }
 
     public function execute(): void {
-        $commandMap = $this->plugin->getServer()->getCommandMap();
+        $commandIds = [];
         foreach($this->commands as $command) {
-            $commandMap->dispatch(new ConsoleCommandSender(), $command);
+            $commandIds[] = $command->getIdentifier();
+            $command->execute();
         }
 
-        $this->plugin->getProvider()->removeCommands($this->commands);
+        $this->plugin->getProvider()->removeCommands($commandIds);
         $this->plugin->getQueue()->removeAction($this->targetName);
     }
 

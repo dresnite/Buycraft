@@ -6,6 +6,7 @@ namespace GiantQuartz\queue;
 
 use GiantQuartz\Buycraft;
 use GiantQuartz\task\RefreshQueueTask;
+use GiantQuartz\utils\BuycraftCommand;
 use pocketmine\player\Player;
 
 class Queue {
@@ -28,6 +29,10 @@ class Queue {
         }
     }
 
+    /**
+     * @param string $targetName
+     * @param BuycraftCommand[] $commands
+     */
     public function addAction(string $targetName, array $commands): void {
         $this->actions[$targetName] = new QueueAction($this->plugin, $targetName, $commands);
     }
