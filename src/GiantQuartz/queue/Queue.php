@@ -34,7 +34,7 @@ class Queue {
      * @param BuycraftCommand[] $commands
      */
     public function addAction(string $targetName, array $commands): void {
-        $this->actions[$targetName] = new QueueAction($this->plugin, $targetName, $commands);
+        $this->actions[strtolower($targetName)] = new QueueAction($this->plugin, $targetName, $commands);
     }
 
     public function removeAction(string $targetName): void {
