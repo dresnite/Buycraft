@@ -4,13 +4,18 @@
 namespace GiantQuartz\provider;
 
 
-use GiantQuartz\provider\tasks\FetchDuePlayersAsyncTask;
+use GiantQuartz\provider\tasks\FetchQueuedPlayersAsyncTask;
+use GiantQuartz\provider\tasks\FetchOnlineActionsAsyncTask;
 use GiantQuartz\provider\tasks\RemoveCommandsAsyncTask;
 
 class BuycraftProvider extends Provider {
 
-    public function fetchCommands(): void {
-        $this->scheduleAsyncTask(new FetchDuePlayersAsyncTask($this));
+    public function fetchQueuedPlayers(): void {
+        $this->scheduleAsyncTask(new FetchQueuedPlayersAsyncTask($this));
+    }
+
+    public function fetchActions(array $players): void {
+        $this->scheduleAsyncTask(new FetchOnlineActionsAsyncTask($this, $players));
     }
 
     public function removeCommands(array $identifiers): void {

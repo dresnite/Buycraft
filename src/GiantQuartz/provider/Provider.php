@@ -27,7 +27,9 @@ abstract class Provider {
         return $this->secretKey;
     }
 
-    public abstract function fetchCommands(): void;
+    public abstract function fetchQueuedPlayers(): void;
+
+    public abstract function fetchActions(array $players): void;
 
     public abstract function removeCommands(array $identifiers): void;
 

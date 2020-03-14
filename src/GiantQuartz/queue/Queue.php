@@ -37,7 +37,7 @@ class Queue {
     }
 
     public function refresh(): void {
-        $this->plugin->getProvider()->fetchCommands();
+        $this->plugin->getProvider()->fetchQueuedPlayers();
     }
 
     private function initialize(): void {
