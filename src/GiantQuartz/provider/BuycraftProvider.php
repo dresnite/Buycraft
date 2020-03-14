@@ -13,8 +13,8 @@ class BuycraftProvider extends Provider {
         $this->scheduleAsyncTask(new FetchDuePlayersAsyncTask($this));
     }
 
-    public function removeCommands(array $commands): void {
-        $this->scheduleAsyncTask(new RemoveCommandsAsyncTask($this, $commands));
+    public function removeCommands(array $identifiers): void {
+        $this->scheduleAsyncTask(new RemoveCommandsAsyncTask($this, $identifiers));
     }
 
     public function checkSecretKeyValidity(): void {

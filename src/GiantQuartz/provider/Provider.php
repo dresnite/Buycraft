@@ -29,7 +29,7 @@ abstract class Provider {
 
     public abstract function fetchCommands(): void;
 
-    public abstract function removeCommands(array $commands): void;
+    public abstract function removeCommands(array $identifiers): void;
 
     public abstract function checkSecretKeyValidity(): void;
 
