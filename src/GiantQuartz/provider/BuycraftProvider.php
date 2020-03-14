@@ -4,6 +4,7 @@
 namespace GiantQuartz\provider;
 
 
+use Exception;
 use GiantQuartz\provider\tasks\FetchQueuedPlayersAsyncTask;
 use GiantQuartz\provider\tasks\FetchQueuedPlayerActions;
 use GiantQuartz\provider\tasks\RemoveCommandsAsyncTask;
@@ -22,10 +23,13 @@ class BuycraftProvider extends Provider {
         $this->scheduleAsyncTask(new RemoveCommandsAsyncTask($this, $identifiers));
     }
 
+    /**
+     * @throws Exception
+     */
     public function checkSecretKeyValidity(): void {
         $secretKey = $this->getSecretKey();
         if($secretKey === false) {
-            // todo throw exception
+            throw new Exception("The secret key is not set, set it in the config file!");
         }
     }
 
