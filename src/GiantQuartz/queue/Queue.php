@@ -46,7 +46,7 @@ class Queue {
     }
 
     private function initialize(): void {
-        $this->plugin->getScheduler()->scheduleRepeatingTask(new RefreshQueueTask($this), 20 * 60 * 2);
+        $this->plugin->getScheduler()->scheduleRepeatingTask(new RefreshQueueTask($this), 20 * 60 * 5);
         $this->plugin->getServer()->getPluginManager()->registerEvents(new QueueListener($this), $this->plugin);
         $this->refresh();
     }
