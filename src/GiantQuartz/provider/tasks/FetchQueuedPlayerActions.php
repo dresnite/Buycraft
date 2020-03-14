@@ -23,7 +23,7 @@ class FetchQueuedPlayerActions extends ProviderAsyncTask {
      * @throws Exception
      */
     public function onRun(): void {
-        $this->executeCurl($this->getCurlSession(self::QUEUE_URL . "/online-commands/$this->playerId"));
+        $this->executeCurl($this->getCurlSession(self::QUEUE_URL . "online-commands/$this->playerId"));
     }
 
     /**
