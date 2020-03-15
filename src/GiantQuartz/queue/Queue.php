@@ -17,8 +17,12 @@ class Queue {
     /** @var QueueAction[] */
     private $actions = [];
 
+    /** @var int */
+    private $refreshFrequency;
+
     public function __construct(Buycraft $plugin) {
         $this->plugin = $plugin;
+        $this->refreshFrequency = $plugin->getConfig()->get("refresh-frequency");
         $this->initialize();
     }
 
@@ -46,7 +50,7 @@ class Queue {
     }
 
     private function initialize(): void {
-        $this->plugin->getScheduler()->scheduleRepeatingTask(new RefreshQueueTask($this), 20 * 60 * 5);
+        $this->plugin->getScheduler()->scheduleRepeatingTask(new RefreshQueueTask($this), 20 * 60 * $this->refreshFrequency);
         $this->plugin->getServer()->getPluginManager()->registerEvents(new QueueListener($this), $this->plugin);
     }
 

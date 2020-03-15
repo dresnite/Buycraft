@@ -1,3 +1,6 @@
 # Introduce your Buycraft secret key
 # This is strictly necessary to link this plugin with your Buycraft panel
 secret-key: false
+# Introduce the frequency, in minutes, with which the plugin will send a
+# query to Buycraft's server to refresh the queue.
+refresh-frequency: 1
