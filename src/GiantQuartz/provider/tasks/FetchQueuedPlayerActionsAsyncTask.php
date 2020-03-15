@@ -42,7 +42,9 @@ class FetchQueuedPlayerActionsAsyncTask extends ProviderAsyncTask {
             $commands[] = new BuycraftCommand($commandData["id"], str_replace("{name}", $this->playerName, $commandData["command"]));
         }
 
-        $plugin->getQueue()->addAction($this->playerName, $commands);
+        $queue = $plugin->getQueue();
+        $queue->addAction($this->playerName, $commands);
+        $queue->checkOnlinePlayers();
 
         $plugin->getLogger()->debug("FetchQueuedPlayerActionsAsyncTask was successfully executed for {$this->playerName}");
     }

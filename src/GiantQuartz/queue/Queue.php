@@ -45,6 +45,12 @@ class Queue {
         unset($this->actions[strtolower($targetName)]);
     }
 
+    public function checkOnlinePlayers(): void {
+        foreach($this->plugin->getServer()->getOnlinePlayers() as $player) {
+            $this->executeQueuedActions($player);
+        }
+    }
+
     public function refresh(): void {
         $this->plugin->getProvider()->fetchQueuedPlayers();
     }
