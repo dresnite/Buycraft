@@ -28,8 +28,11 @@ class FetchOfflineCommandsAsyncTask extends ProviderAsyncTask {
             $commandIdsExecuted[] = $commandData["id"];
             $plugin->getServer()->getCommandMap()->dispatch(new ConsoleCommandSender(), str_replace("{name}", $commandData["player"]["name"], $commandData["command"]));
         }
+        
+        if(count($commandIdsExecuted) > 0) {
+            $plugin->getProvider()->removeCommands($commandIdsExecuted);
+        }
 
-        $plugin->getProvider()->removeCommands($commandIdsExecuted);
         $plugin->getLogger()->debug("FetchOfflineCommandsAsyncTask was successfully executed");
     }
 
