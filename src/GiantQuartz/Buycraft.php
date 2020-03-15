@@ -26,6 +26,7 @@ class Buycraft extends PluginBase {
 
     protected function onEnable(): void {
         $this->provider = new BuycraftProvider($this);
+        $this->provider->fetchOfflineCommands();
         $this->queue = new Queue($this);
     }
 
