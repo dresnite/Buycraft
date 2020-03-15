@@ -25,6 +25,7 @@ class FetchQueuedPlayersAsyncTask extends ProviderAsyncTask {
 
         foreach($result["players"] as $playerData) {
             $plugin->getProvider()->fetchQueuedPlayerActions($playerData["id"], $playerData["name"]);
+            $plugin->getLogger()->debug("Requesting queued player {$playerData["name"]} actions");
         }
 
         $plugin->getLogger()->debug("FetchQueuedPlayersAsyncTask was successfully executed");

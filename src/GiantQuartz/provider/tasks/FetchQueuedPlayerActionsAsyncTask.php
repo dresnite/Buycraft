@@ -44,7 +44,7 @@ class FetchQueuedPlayerActionsAsyncTask extends ProviderAsyncTask {
 
         $plugin->getQueue()->addAction($this->playerName, $commands);
 
-        $plugin->getLogger()->debug("FetchQueuedPlayerActionsAsyncTask was successfully executed");
+        $plugin->getLogger()->debug("FetchQueuedPlayerActionsAsyncTask was successfully executed for {$this->playerName}");
     }
 
 }
