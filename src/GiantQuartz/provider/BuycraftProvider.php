@@ -34,7 +34,9 @@ class BuycraftProvider extends Provider {
     public function checkSecretKeyValidity(): void {
         $secretKey = $this->getSecretKey();
         if($secretKey == false) {
-            throw new Exception("The secret key is not set, set it in the config file!");
+            $plugin = $this->getPlugin();
+            $plugin->getLogger()->error("The secret key is not set, set it in the config file!");
+            $plugin->getServer()->getPluginManager()->disablePlugin($plugin);
         }
     }
 

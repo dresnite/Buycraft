@@ -20,9 +20,10 @@ abstract class Provider {
         $this->checkSecretKeyValidity();
     }
 
-    /**
-     * @return string
-     */
+    public function getPlugin(): Buycraft {
+        return $this->plugin;
+    }
+
     public function getSecretKey(): string {
         return $this->secretKey;
     }
