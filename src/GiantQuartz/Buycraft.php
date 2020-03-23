@@ -17,14 +17,14 @@ class Buycraft extends PluginBase {
     /** @var Queue */
     private $queue;
 
-    protected function onLoad(): void {
+    public function onLoad(): void {
         if(!is_dir($this->getDataFolder())) {
             mkdir($this->getDataFolder());
         }
         $this->saveDefaultConfig();
     }
 
-    protected function onEnable(): void {
+    public function onEnable(): void {
         $this->provider = new BuycraftProvider($this);
         $this->provider->fetchOfflineCommands();
         $this->queue = new Queue($this);

@@ -8,6 +8,7 @@ use Exception;
 use GiantQuartz\provider\Provider;
 use GiantQuartz\provider\ProviderAsyncTask;
 use GiantQuartz\utils\BuycraftCommand;
+use pocketmine\Server;
 
 class FetchQueuedPlayerActionsAsyncTask extends ProviderAsyncTask {
 
@@ -31,9 +32,10 @@ class FetchQueuedPlayerActionsAsyncTask extends ProviderAsyncTask {
     }
 
     /**
+     * @param Server $server
      * @throws Exception
      */
-    public function onCompletion(): void {
+    public function onCompletion(Server $server): void {
         $plugin = $this->getBuycraft();
         $result = $this->getResult();
 

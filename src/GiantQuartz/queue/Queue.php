@@ -7,7 +7,7 @@ namespace GiantQuartz\queue;
 use GiantQuartz\Buycraft;
 use GiantQuartz\task\RefreshQueueTask;
 use GiantQuartz\utils\BuycraftCommand;
-use pocketmine\player\Player;
+use pocketmine\Player;
 
 class Queue {
 

@@ -7,6 +7,7 @@ namespace GiantQuartz\provider\tasks;
 use Exception;
 use GiantQuartz\provider\ProviderAsyncTask;
 use pocketmine\command\ConsoleCommandSender;
+use pocketmine\Server;
 
 class FetchOfflineCommandsAsyncTask extends ProviderAsyncTask {
 
@@ -18,9 +19,10 @@ class FetchOfflineCommandsAsyncTask extends ProviderAsyncTask {
     }
 
     /**
+     * @param Server $server
      * @throws Exception
      */
-    public function onCompletion(): void {
+    public function onCompletion(Server $server): void {
         $plugin = $this->getBuycraft();
 
         $commandIdsExecuted = [];

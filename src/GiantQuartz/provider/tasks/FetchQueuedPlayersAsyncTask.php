@@ -6,6 +6,7 @@ namespace GiantQuartz\provider\tasks;
 
 use Exception;
 use GiantQuartz\provider\ProviderAsyncTask;
+use pocketmine\Server;
 
 class FetchQueuedPlayersAsyncTask extends ProviderAsyncTask {
 
@@ -17,9 +18,10 @@ class FetchQueuedPlayersAsyncTask extends ProviderAsyncTask {
     }
 
     /**
+     * @param Server $server
      * @throws Exception
      */
-    public function onCompletion(): void {
+    public function onCompletion(Server $server): void {
         $plugin = $this->getBuycraft();
         $result = $this->getResult();
 
