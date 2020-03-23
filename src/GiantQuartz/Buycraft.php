@@ -25,9 +25,14 @@ class Buycraft extends PluginBase {
     }
 
     public function onEnable(): void {
-        $this->provider = new BuycraftProvider($this);
-        $this->provider->fetchOfflineCommands();
-        $this->queue = new Queue($this);
+        if($this->getConfig()->get("secret-key")) {
+            $this->provider = new BuycraftProvider($this);
+            $this->provider->fetchOfflineCommands();
+            $this->queue = new Queue($this);
+        } else {
+            $this->getLogger()->error("Buycraft doesn't have a valid secret-key set");
+            $this->getServer()->getPluginManager()->disablePlugin($this);
+        }
     }
 
     public function getProvider(): Provider {

@@ -4,7 +4,6 @@
 namespace GiantQuartz\provider;
 
 
-use Exception;
 use GiantQuartz\provider\tasks\FetchOfflineCommandsAsyncTask;
 use GiantQuartz\provider\tasks\FetchQueuedPlayersAsyncTask;
 use GiantQuartz\provider\tasks\FetchQueuedPlayerActionsAsyncTask;
@@ -26,18 +25,6 @@ class BuycraftProvider extends Provider {
 
     public function removeCommands(array $identifiers): void {
         $this->scheduleAsyncTask(new RemoveCommandsAsyncTask($this, $identifiers));
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function checkSecretKeyValidity(): void {
-        $secretKey = $this->getSecretKey();
-        if($secretKey == false) {
-            $plugin = $this->getPlugin();
-            $plugin->getLogger()->error("The secret key is not set, set it in the config file!");
-            $plugin->getServer()->getPluginManager()->disablePlugin($plugin);
-        }
     }
 
 }

@@ -17,7 +17,6 @@ abstract class Provider {
     public function __construct(Buycraft $plugin) {
         $this->plugin = $plugin;
         $this->secretKey = $plugin->getConfig()->get("secret-key");
-        $this->checkSecretKeyValidity();
     }
 
     public function getPlugin(): Buycraft {
@@ -35,8 +34,6 @@ abstract class Provider {
     public abstract function fetchQueuedPlayerActions(int $playerId, string $playerName): void;
 
     public abstract function removeCommands(array $identifiers): void;
-
-    public abstract function checkSecretKeyValidity(): void;
 
     protected function scheduleAsyncTask(ProviderAsyncTask $task): void {
         $this->plugin->getServer()->getAsyncPool()->submitTask($task);
