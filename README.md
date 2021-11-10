@@ -5,3 +5,7 @@ This plugin is a minimalist implementation of the Tebex API for a PocketMine-MP 
 ### How to pair the plugin with your Buycraft/Tebex account
 
 Set your secret key in the `config.yml`.
+
+### Where to find the .phar
+
+Go to the [releases section](https://github.com/andresbytes/Buycraft/releases).
